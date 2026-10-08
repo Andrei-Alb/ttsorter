@@ -1,5 +1,5 @@
 (() => {
-  const TAG = '__ttsorte';
+  const TAG = '__ttsorter';
   const items = new Map();
   const cards = new Map();
   const downloads = new Map();
@@ -55,19 +55,19 @@
   const profileFromPath = () => location.pathname.match(/^\/@([^/?#]+)/)?.[1] || '';
 
   // ---------- montagem ----------
-  const host = document.createElement('ttsorte-root');
+  const host = document.createElement('ttsorter-root');
   host.style.cssText = 'all: initial; position: fixed; z-index: 2147483646; inset: auto 0 0 auto;';
   const root = host.attachShadow({ mode: 'open' });
   root.innerHTML = `
     <link rel="stylesheet" href="${chrome.runtime.getURL('src/panel.css')}">
-    <button class="fab" part="fab" title="Abrir ttsorte">
+    <button class="fab" part="fab" title="Abrir ttsorter">
       <img src="${LOGO}" alt=""><span class="fab-count">0</span>
     </button>
-    <section class="panel" role="dialog" aria-label="ttsorte">
+    <section class="panel" role="dialog" aria-label="ttsorter">
       <header class="head">
         <div class="brand">
           <span class="mark"><img src="${LOGO}" alt=""></span>
-          <div class="brand-txt"><strong>ttsorte</strong><span class="sub"><b class="count">0</b> vídeos capturados</span></div>
+          <div class="brand-txt"><strong>ttsorter</strong><span class="sub"><b class="count">0</b> vídeos capturados</span></div>
         </div>
         <div class="head-actions">
           <button class="ghost clear" title="Limpar lista">${icon('trash')}</button>

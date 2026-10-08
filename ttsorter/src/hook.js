@@ -1,10 +1,10 @@
 // Roda no MAIN world em document_start: só daqui dá pra ver as respostas da API
 // do TikTok (fetch/XHR) antes do app consumir. A UI fica no isolated world.
 (() => {
-  if (window.__ttsorteHook) return;
-  window.__ttsorteHook = true;
+  if (window.__ttsorterHook) return;
+  window.__ttsorterHook = true;
 
-  const TAG = '__ttsorte';
+  const TAG = '__ttsorter';
   const items = new Map();
   let pending = [];
   let flushTimer = 0;
@@ -137,11 +137,11 @@
   const origOpen = XHR.open;
   const origSend = XHR.send;
   XHR.open = function (method, url) {
-    this.__ttsorteUrl = url;
+    this.__ttsorterUrl = url;
     return origOpen.apply(this, arguments);
   };
   XHR.send = function () {
-    if (watched(String(this.__ttsorteUrl || ''))) {
+    if (watched(String(this.__ttsorterUrl || ''))) {
       this.addEventListener('load', () => {
         try {
           if (this.responseType === '' || this.responseType === 'text') scanText(this.responseText);

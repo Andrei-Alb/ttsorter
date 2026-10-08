@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/logo.png" width="96" height="96" alt="ttsorte">
+<img src="docs/logo.png" width="96" height="96" alt="ttsorter">
 
-# ttsorte
+# ttsorter
 
 **Ordene vídeos do TikTok por views, curtidas, comentários, compartilhamentos ou data, e baixe em alta qualidade sem marca d'água.**
 
@@ -10,15 +10,15 @@ Grátis, open source, roda inteiro no seu navegador.
 
 [![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-e9f056?style=flat-square&labelColor=1e1916)](LICENSE)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-ff5c34?style=flat-square&logo=googlechrome&logoColor=white&labelColor=1e1916)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
-[![Release](https://img.shields.io/github/v/release/Andrei-Alb/ttsorte?style=flat-square&color=ff5c34&labelColor=1e1916)](https://github.com/Andrei-Alb/ttsorte/releases/latest)
+[![Release](https://img.shields.io/github/v/release/Andrei-Alb/ttsorter?style=flat-square&color=ff5c34&labelColor=1e1916)](https://github.com/Andrei-Alb/ttsorter/releases/latest)
 
-[**⬇ Baixar a extensão**](https://github.com/Andrei-Alb/ttsorte/releases/latest/download/ttsorte.zip)
+[**⬇ Baixar a extensão**](https://github.com/Andrei-Alb/ttsorter/releases/latest/download/ttsorter.zip)
 
 </div>
 
 <br>
 
-![ttsorte aberto no perfil da NASA, ordenado por visualizações](docs/hero.png)
+![ttsorter aberto no perfil da NASA, ordenado por visualizações](docs/hero.png)
 
 ## O que ela faz
 
@@ -31,7 +31,7 @@ Grátis, open source, roda inteiro no seu navegador.
 <table>
 <tr>
 <td width="50%" align="center"><img src="docs/demo.gif" alt="Trocando a ordenação e baixando um vídeo"><br><sub>Ordenando e baixando</sub></td>
-<td width="50%" align="center"><img src="docs/panel.png" alt="Painel do ttsorte"><br><sub>O painel</sub></td>
+<td width="50%" align="center"><img src="docs/panel.png" alt="Painel do ttsorter"><br><sub>O painel</sub></td>
 </tr>
 </table>
 
@@ -39,7 +39,7 @@ Grátis, open source, roda inteiro no seu navegador.
 
 A extensão ainda não está na Chrome Web Store. A instalação manual leva um minuto:
 
-1. Baixe o [**ttsorte.zip**](https://github.com/Andrei-Alb/ttsorte/releases/latest/download/ttsorte.zip) e descompacte numa pasta que você não vai apagar.
+1. Baixe o [**ttsorter.zip**](https://github.com/Andrei-Alb/ttsorter/releases/latest/download/ttsorter.zip) e descompacte numa pasta que você não vai apagar.
 2. Abra `chrome://extensions` no navegador.
 3. Ligue o **Modo do desenvolvedor**, no canto superior direito.
 4. Clique em **Carregar sem compactação** e escolha a pasta descompactada (a que tem o `manifest.json`).
@@ -51,10 +51,10 @@ Funciona em Chrome, Edge, Brave, Opera, Arc e outros navegadores baseados em Chr
 <summary>Instalar a partir do código</summary>
 
 ```bash
-git clone https://github.com/Andrei-Alb/ttsorte.git
+git clone https://github.com/Andrei-Alb/ttsorter.git
 ```
 
-Depois siga os passos 2 a 5 escolhendo a pasta `ttsorte/ttsorte`. Não tem build: o que está no repositório é o que roda.
+Depois siga os passos 2 a 5 escolhendo a pasta `ttsorter/ttsorter`. Não tem build: o que está no repositório é o que roda.
 
 </details>
 
@@ -89,7 +89,7 @@ Permissões pedidas:
 ## Como funciona
 
 ```
-ttsorte/
+ttsorter/
 ├── manifest.json
 ├── icons/
 └── src/
@@ -107,7 +107,7 @@ Contribuições são bem-vindas. Abra uma issue antes de mudanças grandes.
 
 ## Aviso
 
-O ttsorte não tem nenhuma relação com o TikTok ou a ByteDance. Use para baixar conteúdo seu ou que você tem permissão de usar, e respeite os direitos autorais de quem criou o vídeo. Se o TikTok mudar o site, a extensão pode parar de funcionar até ser atualizada.
+O ttsorter não tem nenhuma relação com o TikTok ou a ByteDance. Use para baixar conteúdo seu ou que você tem permissão de usar, e respeite os direitos autorais de quem criou o vídeo. Se o TikTok mudar o site, a extensão pode parar de funcionar até ser atualizada.
 
 ## Licença
 
