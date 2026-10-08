@@ -1,8 +1,8 @@
-// O TikTok às vezes responde 403 a uma página aberta em aba nova e libera na
-// tentativa seguinte. As abas que a extensão abre recarregam sozinhas nesse caso.
+// TikTok sometimes answers 403 to a page opened in a new tab and lets the next
+// attempt through. Tabs opened by the extension reload themselves when that happens.
 const MAX_RETRIES = 2;
 const RETRY_DELAY_MS = 800;
-// ponytail: estado em memória; se o service worker dormir entre o 403 e o reload, aquela aba fica sem retry.
+// ponytail: in-memory state; if the service worker sleeps between the 403 and the reload, that tab gets no retry.
 const retriesLeft = new Map();
 
 async function openTikTok(url) {
@@ -32,8 +32,8 @@ chrome.runtime.onMessage.addListener((msg, _sender, reply) => {
     openTikTok(msg.url);
     return;
   }
-  // Caminho pros arquivos que a página não consegue buscar (CORS do tiktokcdn.com,
-  // link expirado): o gerenciador de downloads baixa direto, com os cookies do TikTok.
+  // Fallback for files the page can't fetch (tiktokcdn.com CORS, expired link):
+  // the download manager fetches them directly, with TikTok's cookies.
   if (msg?.type !== 'download' || !Array.isArray(msg.files)) return;
   Promise.all(
     msg.files.map((f) => chrome.downloads.download({ url: f.url, filename: `ttsorter/${f.filename}`, conflictAction: 'uniquify' })),

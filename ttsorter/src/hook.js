@@ -1,5 +1,5 @@
-// Roda no MAIN world em document_start: só daqui dá pra ver as respostas da API
-// do TikTok (fetch/XHR) antes do app consumir. A UI fica no isolated world.
+// Runs in the MAIN world at document_start: only from here can we see TikTok's
+// API responses (fetch/XHR) before the app consumes them. The UI lives in the isolated world.
 (() => {
   if (window.__ttsorterHook) return;
   window.__ttsorterHook = true;
@@ -32,11 +32,11 @@
         out.push({ urls: pa.UrlList, w: pa.Width || 0, h: pa.Height || 0, bitrate: b.Bitrate || 0, codec: b.CodecType || '', size: pa.DataSize || 0 });
       }
     }
-    // playAddr é o stream do player web, sem marca d'água (downloadAddr tem).
+    // playAddr is the web player stream, without watermark (downloadAddr has one).
     if (video.playAddr) {
       out.push({ urls: [video.playAddr], w: video.width || 0, h: video.height || 0, bitrate: video.bitrate || 0, codec: video.codecType || '', size: 0 });
     }
-    // Maior resolução primeiro; empate decide pelo bitrate.
+    // Highest resolution first; bitrate breaks ties.
     return out.sort((a, b) => b.w * b.h - a.w * a.h || b.bitrate - a.bitrate);
   }
 
@@ -62,7 +62,7 @@
         shares: num(s.shareCount, s2.shareCount),
       },
       cover: v.cover || v.originCover || raw.imagePost?.cover?.imageURL?.urlList?.[0] || images[0] || '',
-      // Itens patrocinados chegam com a duração em ms; o TikTok não aceita upload acima de 60 min.
+      // Sponsored items report duration in ms; TikTok doesn't accept uploads longer than 60 min.
       duration: num(v.duration) > 3600 ? num(v.duration) / 1000 : num(v.duration),
       isPhoto: !v.playAddr && images.length > 0,
       images,
@@ -77,10 +77,10 @@
       return;
     }
     if (isItem(node)) {
-      // Anúncio do feed: o link /video/<id> dá "Video currently unavailable" e as métricas não são orgânicas.
+      // Feed ad: its /video/<id> link shows "Video currently unavailable" and its stats aren't organic.
       if (node.isAd === true || node.adInfo || node.ad_info) return;
       const it = normalize(node);
-      // Algumas respostas vêm sem playAddr/stats completos; não perder o que já temos.
+      // Some responses lack playAddr or full stats; keep what we already have.
       const prev = items.get(it.id);
       if (prev) {
         if (!it.sources.length) it.sources = prev.sources;
@@ -184,8 +184,8 @@
       onProgress(total ? got / total : 0);
     }
     const blob = new Blob(chunks, { type: res.headers.get('content-type') || 'video/mp4' });
-    // Resposta HTML/JSON de bloqueio não é vídeo.
-    if (blob.size < 10_000 || /text|json/.test(blob.type)) throw new Error('resposta inválida');
+    // An HTML/JSON block page is not a video.
+    if (blob.size < 10_000 || /text|json/.test(blob.type)) throw new Error('invalid response');
     return blob;
   }
 
@@ -205,16 +205,16 @@
     const it = items.get(id);
     const progress = (p) => post('dl', { reqId, state: 'progress', p });
     try {
-      if (!it) throw new Error('vídeo não encontrado');
+      if (!it) throw new Error('video not found');
       if (it.isPhoto) {
-        // As imagens ficam no tiktokcdn.com, que não libera CORS pra página; o
-        // gerenciador de downloads não tem essa restrição.
+        // Images live on tiktokcdn.com, which doesn't allow CORS for the page;
+        // the browser's download manager has no such restriction.
         const files = it.images.map((url, i) => ({ url, filename: fileName(it, `${i + 1}.jpg`) }));
         post('dl', { reqId, state: 'fallback', files });
         return;
       }
       const urls = it.sources.flatMap((s) => s.urls);
-      if (!urls.length) throw new Error('sem link de vídeo');
+      if (!urls.length) throw new Error('no video link');
       let lastErr;
       for (const url of urls) {
         try {
@@ -226,7 +226,7 @@
           lastErr = e;
         }
       }
-      // CORS/expiração no fetch da página: o background tenta via chrome.downloads.
+      // Page fetch failed (CORS or expired link): the background retries through chrome.downloads.
       post('dl', { reqId, state: 'fallback', files: [{ url: urls[0], filename: fileName(it, 'mp4') }], error: String(lastErr?.message || lastErr) });
     } catch (e) {
       post('dl', { reqId, state: 'error', error: String(e?.message || e) });

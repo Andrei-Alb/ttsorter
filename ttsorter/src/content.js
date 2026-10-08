@@ -3,15 +3,15 @@
   const items = new Map();
   const cards = new Map();
   const downloads = new Map();
-  // Perfil carrega recomendados de outros autores junto; em página de perfil o padrão é filtrar.
+  // Profile pages also load recommended videos from other creators, so profile filtering is on by default.
   const state = { sort: 'views', dir: 'desc', open: true, query: '', onlyProfile: true };
 
   const SORTS = [
     { key: 'views', label: 'Views', icon: 'eye' },
-    { key: 'likes', label: 'Curtidas', icon: 'heart' },
-    { key: 'comments', label: 'Coment.', icon: 'comment' },
-    { key: 'shares', label: 'Compart.', icon: 'share' },
-    { key: 'date', label: 'Data', icon: 'calendar' },
+    { key: 'likes', label: 'Likes', icon: 'heart' },
+    { key: 'comments', label: 'Comments', icon: 'comment' },
+    { key: 'shares', label: 'Shares', icon: 'share' },
+    { key: 'date', label: 'Date', icon: 'calendar' },
   ];
 
   const ICONS = {
@@ -37,10 +37,11 @@
     `<svg class="i ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
   const LOGO = chrome.runtime.getURL('icons/128.png');
 
-  const compact = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 1 });
-  const full = new Intl.NumberFormat('pt-BR');
-  const fmtDate = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', year: '2-digit' });
-  const rel = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'auto' });
+  const LOCALE = 'en-US';
+  const compact = new Intl.NumberFormat(LOCALE, { notation: 'compact', maximumFractionDigits: 1 });
+  const full = new Intl.NumberFormat(LOCALE);
+  const fmtDate = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
+  const rel = new Intl.RelativeTimeFormat(LOCALE, { numeric: 'auto' });
   const relTime = (sec) => {
     const diff = sec - Date.now() / 1000;
     const abs = Math.abs(diff);
@@ -54,24 +55,24 @@
   const metric = (it, key) => (key === 'date' ? it.createTime : it.stats[key]);
   const profileFromPath = () => location.pathname.match(/^\/@([^/?#]+)/)?.[1] || '';
 
-  // ---------- montagem ----------
+  // ---------- mount ----------
   const host = document.createElement('ttsorter-root');
   host.style.cssText = 'all: initial; position: fixed; z-index: 2147483646; inset: auto 0 0 auto;';
   const root = host.attachShadow({ mode: 'open' });
   root.innerHTML = `
     <link rel="stylesheet" href="${chrome.runtime.getURL('src/panel.css')}">
-    <button class="fab" part="fab" title="Abrir ttsorter">
+    <button class="fab" part="fab" title="Open ttsorter">
       <img src="${LOGO}" alt=""><span class="fab-count">0</span>
     </button>
     <section class="panel" role="dialog" aria-label="ttsorter">
       <header class="head">
         <div class="brand">
           <span class="mark"><img src="${LOGO}" alt=""></span>
-          <div class="brand-txt"><strong>ttsorter</strong><span class="sub"><b class="count">0</b> vídeos capturados</span></div>
+          <div class="brand-txt"><strong>ttsorter</strong><span class="sub"><b class="count">0</b> videos captured</span></div>
         </div>
         <div class="head-actions">
-          <button class="ghost clear" title="Limpar lista">${icon('trash')}</button>
-          <button class="ghost min" title="Minimizar">${icon('minus')}</button>
+          <button class="ghost clear" title="Clear list">${icon('trash')}</button>
+          <button class="ghost min" title="Minimize">${icon('minus')}</button>
         </div>
       </header>
       <div class="sorts" role="tablist">
@@ -79,15 +80,15 @@
         <span class="sort-pill"></span>
       </div>
       <div class="tools">
-        <label class="search">${icon('search')}<input type="search" placeholder="Legenda ou @perfil" aria-label="Buscar por legenda ou @perfil" spellcheck="false"></label>
-        <button class="chip dir" title="Inverter ordem">${icon('arrow')}<span>Maior</span></button>
-        <button class="chip scope" title="Mostrar só vídeos do perfil aberto">${icon('user')}<span>Perfil</span></button>
+        <label class="search">${icon('search')}<input type="search" placeholder="Caption or @profile" aria-label="Search by caption or @profile" spellcheck="false"></label>
+        <button class="chip dir" title="Reverse order">${icon('arrow')}<span>Highest</span></button>
+        <button class="chip scope" title="Show only videos from the open profile">${icon('user')}<span>Profile</span></button>
       </div>
       <div class="list" role="list"></div>
       <div class="empty">
         <div class="empty-art"><span></span><span></span><span></span></div>
-        <strong>Role o feed pra capturar vídeos</strong>
-        <p>Abra um perfil, a busca ou o Para Você. Cada vídeo carregado entra aqui com as métricas.</p>
+        <strong>Scroll the feed to capture videos</strong>
+        <p>Open a profile, a search or the For You feed. Every video that loads shows up here with its stats.</p>
       </div>
     </section>
     <div class="toast" role="status"></div>
@@ -105,7 +106,7 @@
   if (document.body) mount();
   else document.addEventListener('DOMContentLoaded', mount, { once: true });
 
-  // ---------- estado persistido ----------
+  // ---------- persisted state ----------
   chrome.storage.local.get(['sort', 'dir', 'open']).then((s) => {
     if (SORTS.some((x) => x.key === s.sort)) state.sort = s.sort;
     if (s.dir === 'asc' || s.dir === 'desc') state.dir = s.dir;
@@ -132,11 +133,11 @@
     movePill();
     const dirBtn = $('.dir');
     dirBtn.classList.toggle('asc', state.dir === 'asc');
-    dirBtn.querySelector('span').textContent = state.sort === 'date' ? (state.dir === 'desc' ? 'Recentes' : 'Antigos') : state.dir === 'desc' ? 'Maior' : 'Menor';
+    dirBtn.querySelector('span').textContent = state.sort === 'date' ? (state.dir === 'desc' ? 'Newest' : 'Oldest') : state.dir === 'desc' ? 'Highest' : 'Lowest';
     const prof = profileFromPath();
     scopeBtn.hidden = !prof;
     scopeBtn.classList.toggle('on', state.onlyProfile && !!prof);
-    scopeBtn.querySelector('span').textContent = prof ? `@${prof}` : 'Perfil';
+    scopeBtn.querySelector('span').textContent = prof ? `@${prof}` : 'Profile';
   }
 
   function movePill() {
@@ -169,12 +170,12 @@
         </div>
       </div>
       <div class="actions">
-        <button class="act dl" title="Baixar em alta qualidade, sem marca d'água">
+        <button class="act dl" title="Download in high quality, no watermark">
           <svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16"/></svg>
           <span class="dl-ico">${icon('download')}</span>
         </button>
-        <button class="act copy" title="Copiar link">${icon('link')}</button>
-        <a class="act open" target="_blank" rel="noopener" title="Abrir no TikTok">${icon('open')}</a>
+        <button class="act copy" title="Copy link">${icon('link')}</button>
+        <a class="act open" target="_blank" rel="noopener" title="Open on TikTok">${icon('open')}</a>
       </div>`;
     el.querySelector('.dl').addEventListener('click', () => startDownload(it.id));
     for (const a of el.querySelectorAll('a.thumb, a.open')) {
@@ -188,9 +189,9 @@
       const cur = items.get(it.id);
       try {
         await navigator.clipboard.writeText(videoUrl(cur));
-        toast('Link copiado');
+        toast('Link copied');
       } catch {
-        toast('Não deu pra copiar o link');
+        toast("Couldn't copy the link");
       }
     });
     const img = el.querySelector('img');
@@ -209,8 +210,8 @@
     el.querySelector('.who').textContent = `@${it.author.uniqueId}`;
     const when = el.querySelector('.when');
     when.textContent = it.createTime ? relTime(it.createTime) : '';
-    when.title = it.createTime ? new Date(it.createTime * 1000).toLocaleString('pt-BR') : '';
-    el.querySelector('.desc').textContent = it.desc || 'Sem legenda';
+    when.title = it.createTime ? new Date(it.createTime * 1000).toLocaleString(LOCALE) : '';
+    el.querySelector('.desc').textContent = it.desc || 'No caption';
     el.querySelector('.desc').classList.toggle('muted', !it.desc);
     for (const span of el.querySelectorAll('.stats span')) {
       const k = span.dataset.k;
@@ -219,7 +220,7 @@
       span.classList.toggle('hot', state.sort === k);
     }
     when.classList.toggle('hot', state.sort === 'date');
-    el.querySelector('.dl').title = it.isPhoto ? 'Baixar fotos do carrossel' : "Baixar em alta qualidade, sem marca d'água";
+    el.querySelector('.dl').title = it.isPhoto ? 'Download carousel photos' : 'Download in high quality, no watermark';
   }
 
   function visibleItems() {
@@ -298,7 +299,7 @@
     $('.fab-count').textContent = n > 999 ? '999+' : String(n);
     fab.classList.toggle('has', n > 0);
     panel.classList.toggle('is-empty', sorted.length === 0);
-    $('.empty strong').textContent = n === 0 ? 'Role o feed pra capturar vídeos' : 'Nada bate com o filtro';
+    $('.empty strong').textContent = n === 0 ? 'Scroll the feed to capture videos' : 'Nothing matches the filter';
     $('.empty p').hidden = n !== 0;
     for (const [id, d] of downloads) paintDownload(id, d);
   }
@@ -324,7 +325,7 @@
     btn.style.setProperty('--p', d.state === 'progress' ? Math.max(0.04, d.p || 0) : d.state === 'done' ? 1 : 0);
     btn.classList.toggle('indeterminate', d.state === 'progress' && !d.p);
     btn.querySelector('.dl-ico').innerHTML = icon(d.state === 'done' ? 'check' : d.state === 'error' ? 'alert' : 'download');
-    if (d.state === 'error') btn.title = `Falhou: ${d.error}. Clique pra tentar de novo.`;
+    if (d.state === 'error') btn.title = `Failed: ${d.error}. Click to try again.`;
   }
 
   function finish(id, d) {
@@ -348,7 +349,7 @@
     if (st === 'progress') return finish(id, { state: 'progress', p });
     if (st === 'done') {
       reqToId.delete(reqId);
-      toast('Download concluído');
+      toast('Download complete');
       return finish(id, { state: 'done' });
     }
     if (st === 'fallback') {
@@ -356,14 +357,14 @@
       const r = await chrome.runtime.sendMessage({ type: 'download', files }).catch((e) => ({ ok: false, error: String(e) }));
       reqToId.delete(reqId);
       if (r?.ok) {
-        toast('Download enviado pro navegador');
+        toast('Download handed to the browser');
         return finish(id, { state: 'done' });
       }
-      toast('Não consegui baixar esse vídeo');
+      toast("Couldn't download this video");
       return finish(id, { state: 'error', error: r?.error || error });
     }
     reqToId.delete(reqId);
-    toast(`Erro: ${error}`);
+    toast(`Error: ${error}`);
     finish(id, { state: 'error', error });
   }
 
@@ -377,7 +378,7 @@
     toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
   }
 
-  // ---------- eventos ----------
+  // ---------- events ----------
   window.addEventListener('message', (e) => {
     if (e.source !== window || e.data?.[TAG] !== 'out') return;
     const { type, payload } = e.data;
@@ -386,7 +387,7 @@
       render(false);
     } else if (type === 'dl') onDownloadMsg(payload);
   });
-  // O hook pode ter capturado antes desta UI escutar.
+  // The hook may have captured items before this UI started listening.
   window.postMessage({ [TAG]: 'in', type: 'hello' }, location.origin);
 
   root.querySelectorAll('.sort').forEach((b) =>
@@ -417,14 +418,14 @@
     state.query = searchInput.value;
     render(false);
   });
-  // Teclas digitadas no filtro não podem virar atalho do player do TikTok.
+  // Keys typed in the filter must not trigger TikTok's player shortcuts.
   for (const ev of ['keydown', 'keyup', 'keypress']) searchInput.addEventListener(ev, (e) => e.stopPropagation());
   $('.clear').addEventListener('click', () => {
     items.clear();
     for (const el of cards.values()) el.remove();
     cards.clear();
     render(false);
-    toast('Lista limpa');
+    toast('List cleared');
   });
   $('.min').addEventListener('click', () => setOpen(false));
   fab.addEventListener('click', () => {
@@ -433,7 +434,7 @@
   });
   panel.addEventListener('transitionend', movePill);
 
-  // SPA: o TikTok troca de rota sem recarregar.
+  // SPA: TikTok changes routes without reloading the page.
   let lastPath = location.pathname;
   setInterval(() => {
     if (location.pathname === lastPath) return;
@@ -446,6 +447,6 @@
     if (msg?.type === 'toggle') setOpen(!state.open);
   });
 
-  // Fonte carregada muda a largura das abas.
+  // Tab widths change once the font loads.
   root.querySelector('link').addEventListener('load', () => requestAnimationFrame(movePill));
 })();

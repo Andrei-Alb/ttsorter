@@ -1,25 +1,61 @@
 {
   "manifest_version": 3,
   "name": "ttsorter",
-  "version": "1.1.2",
-  "description": "Ordene vídeos do TikTok por views, curtidas, comentários, compartilhamentos ou data e baixe sem marca d'água.",
-  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
-  "action": { "default_title": "ttsorter: abrir/fechar painel", "default_icon": { "16": "icons/16.png", "48": "icons/48.png" } },
-  "background": { "service_worker": "src/background.js" },
-  "permissions": ["storage", "downloads", "webRequest"],
-  "host_permissions": ["https://www.tiktok.com/*"],
+  "version": "1.2.0",
+  "description": "Sort TikTok videos by views, likes, comments, shares or date, and download them without watermark.",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "ttsorter: open/close panel",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "permissions": [
+    "storage",
+    "downloads",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "https://www.tiktok.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://www.tiktok.com/*"],
-      "js": ["src/hook.js"],
+      "matches": [
+        "https://www.tiktok.com/*"
+      ],
+      "js": [
+        "src/hook.js"
+      ],
       "run_at": "document_start",
       "world": "MAIN"
     },
     {
-      "matches": ["https://www.tiktok.com/*"],
-      "js": ["src/content.js"],
+      "matches": [
+        "https://www.tiktok.com/*"
+      ],
+      "js": [
+        "src/content.js"
+      ],
       "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": [{ "resources": ["src/panel.css", "icons/128.png"], "matches": ["https://www.tiktok.com/*"] }]
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/panel.css",
+        "icons/128.png"
+      ],
+      "matches": [
+        "https://www.tiktok.com/*"
+      ]
+    }
+  ]
 }

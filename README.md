@@ -4,111 +4,111 @@
 
 # ttsorter
 
-**Ordene vídeos do TikTok por views, curtidas, comentários, compartilhamentos ou data, e baixe em alta qualidade sem marca d'água.**
+**Sort TikTok videos by views, likes, comments, shares or date, and download them in high quality without watermark.**
 
-Grátis, open source, roda inteiro no seu navegador.
+Free, open source, runs entirely in your browser.
 
-[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-e9f056?style=flat-square&labelColor=1e1916)](LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-e9f056?style=flat-square&labelColor=1e1916)](LICENSE)
 [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-ff5c34?style=flat-square&logo=googlechrome&logoColor=white&labelColor=1e1916)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 [![Release](https://img.shields.io/github/v/release/Andrei-Alb/ttsorter?style=flat-square&color=ff5c34&labelColor=1e1916)](https://github.com/Andrei-Alb/ttsorter/releases/latest)
 
-[**⬇ Baixar a extensão**](https://github.com/Andrei-Alb/ttsorter/releases/latest/download/ttsorter.zip)
+[**⬇ Download the extension**](https://github.com/Andrei-Alb/ttsorter/releases/latest/download/ttsorter.zip)
 
 </div>
 
 <br>
 
-![ttsorter aberto no perfil da NASA, ordenado por visualizações](docs/hero.png)
+![ttsorter open on NASA's profile, sorted by views](docs/hero.png)
 
-## O que ela faz
+## What it does
 
-- **Captura sozinha** os vídeos conforme você rola o TikTok: perfil, Para Você, busca, hashtag, som.
-- **Mostra as métricas** de cada vídeo num painel flutuante: visualizações, curtidas, comentários, compartilhamentos e data de postagem.
-- **Ordena com um clique** por qualquer uma delas. Clicar de novo inverte a ordem.
-- **Baixa o vídeo** sem marca d'água, na maior resolução que o TikTok oferece (até 1080p). Posts de foto baixam as imagens.
-- **Filtra** por legenda ou @perfil. Na página de um perfil, mostra só os vídeos daquele perfil (o TikTok mistura recomendados de outras contas).
+- **Captures videos automatically** as you scroll TikTok: profiles, For You, search, hashtags, sounds.
+- **Shows the stats** of each video in a floating panel: views, likes, comments, shares and post date.
+- **Sorts in one click** by any of them. Click again to reverse the order.
+- **Downloads the video** without watermark, at the highest resolution TikTok serves (up to 1080p). Photo posts download their images.
+- **Filters** by caption or @profile. On a profile page it shows only that profile's videos (TikTok mixes in recommendations from other accounts).
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="docs/demo.gif" alt="Trocando a ordenação e baixando um vídeo"><br><sub>Ordenando e baixando</sub></td>
-<td width="50%" align="center"><img src="docs/panel.png" alt="Painel do ttsorter"><br><sub>O painel</sub></td>
+<td width="50%" align="center"><img src="docs/demo.gif" alt="Changing the sort order and downloading a video"><br><sub>Sorting and downloading</sub></td>
+<td width="50%" align="center"><img src="docs/panel.png" alt="The ttsorter panel"><br><sub>The panel</sub></td>
 </tr>
 </table>
 
-## Instalação
+## Installation
 
-A extensão ainda não está na Chrome Web Store. A instalação manual leva um minuto:
+The extension isn't on the Chrome Web Store yet. Installing it by hand takes a minute:
 
-1. Baixe o [**ttsorter.zip**](https://github.com/Andrei-Alb/ttsorter/releases/latest/download/ttsorter.zip) e descompacte numa pasta que você não vai apagar.
-2. Abra `chrome://extensions` no navegador.
-3. Ligue o **Modo do desenvolvedor**, no canto superior direito.
-4. Clique em **Carregar sem compactação** e escolha a pasta descompactada (a que tem o `manifest.json`).
-5. Abra o [TikTok](https://www.tiktok.com) e role. O painel aparece à direita.
+1. Download [**ttsorter.zip**](https://github.com/Andrei-Alb/ttsorter/releases/latest/download/ttsorter.zip) and unzip it into a folder you won't delete.
+2. Open `chrome://extensions` in your browser.
+3. Turn on **Developer mode** in the top-right corner.
+4. Click **Load unpacked** and pick the unzipped folder (the one containing `manifest.json`).
+5. Open [TikTok](https://www.tiktok.com) and scroll. The panel shows up on the right.
 
-Funciona em Chrome, Edge, Brave, Opera, Arc e outros navegadores baseados em Chromium.
+Works on Chrome, Edge, Brave, Opera, Arc and other Chromium-based browsers.
 
 <details>
-<summary>Instalar a partir do código</summary>
+<summary>Install from source</summary>
 
 ```bash
 git clone https://github.com/Andrei-Alb/ttsorter.git
 ```
 
-Depois siga os passos 2 a 5 escolhendo a pasta `ttsorter/ttsorter`. Não tem build: o que está no repositório é o que roda.
+Then follow steps 2 to 5, picking the `ttsorter/ttsorter` folder. There's no build step: what's in the repository is what runs.
 
 </details>
 
-## Como usar
+## Usage
 
-| Ação | Como |
+| Action | How |
 | --- | --- |
-| Abrir ou fechar o painel | Clique no ícone da extensão, ou no botão flutuante no canto da tela |
-| Ordenar | Clique em Views, Curtidas, Coment., Compart. ou Data |
-| Inverter a ordem | Clique de novo na mesma aba, ou no botão Maior/Menor |
-| Baixar | Botão de download do card; o anel mostra o progresso |
-| Abrir o vídeo | Clique na miniatura ou no ícone de link externo (abre em nova aba) |
-| Começar do zero | Ícone de lixeira no topo do painel |
+| Open or close the panel | Click the extension icon, or the floating button in the corner of the page |
+| Sort | Click Views, Likes, Comments, Shares or Date |
+| Reverse the order | Click the same tab again, or the Highest/Lowest button |
+| Download | The download button on the card; the ring shows progress |
+| Open the video | Click the thumbnail or the external link icon (opens in a new tab) |
+| Start over | The trash icon at the top of the panel |
 
-Os vídeos capturados ficam só na aba aberta. Recarregou a página, a lista recomeça.
+Captured videos live only in the open tab. Reload the page and the list starts over.
 
-### Sobre a qualidade
+### About quality
 
-A extensão escolhe a maior resolução disponível. Quando o TikTok oferece 1080p, o arquivo vem em **HEVC (H.265)**: abre normalmente no Mac, iPhone, Android e nos editores atuais, mas no Windows pode pedir a [Extensão de Vídeo HEVC](https://apps.microsoft.com/detail/9n4wgh0z6vhq). Sem 1080p, o arquivo vem em 720p H.264.
+The extension picks the highest resolution available. When TikTok serves 1080p, the file is **HEVC (H.265)**: it plays fine on Mac, iPhone, Android and current editors, but Windows may ask for the [HEVC Video Extensions](https://apps.microsoft.com/detail/9n4wgh0z6vhq). Without 1080p, the file is 720p H.264.
 
-## Privacidade
+## Privacy
 
-Nada sai do seu navegador. Não há servidor, conta, telemetria nem analytics. A extensão lê as respostas que o próprio TikTok já entrega à página e baixa os vídeos com a sua sessão.
+Nothing leaves your browser. There's no server, account, telemetry or analytics. The extension reads the responses TikTok already sends to the page and downloads videos with your own session.
 
-Permissões pedidas:
+Permissions requested:
 
-- `storage`: lembrar a ordenação escolhida e se o painel estava aberto.
-- `downloads`: plano B de download quando o navegador bloqueia o caminho principal.
-- `webRequest`: ver o status das páginas do TikTok que a extensão abre; quando o TikTok responde 403, a aba recarrega sozinha (até 2 vezes).
-- Acesso a `www.tiktok.com`: o único site onde ela roda.
+- `storage`: remember the chosen sort order and whether the panel was open.
+- `downloads`: fallback download path when the browser blocks the main one.
+- `webRequest`: see the status of the TikTok pages the extension opens; when TikTok answers 403, the tab reloads itself (up to 2 times).
+- Access to `www.tiktok.com`: the only site it runs on.
 
-## Como funciona
+## How it works
 
 ```
 ttsorter/
 ├── manifest.json
 ├── icons/
 └── src/
-    ├── hook.js         # MAIN world: lê a API do TikTok e faz o download
-    ├── content.js      # painel (shadow DOM), ordenação, filtro, progresso
+    ├── hook.js         # MAIN world: reads TikTok's API and handles downloads
+    ├── content.js      # panel (shadow DOM), sorting, filtering, progress
     ├── panel.css
-    └── background.js   # ícone da extensão e download de reserva
+    └── background.js   # extension icon, opening tabs, fallback download
 ```
 
-- `hook.js` roda no contexto da página em `document_start` e intercepta `fetch`/`XMLHttpRequest` das rotas `/api/` do TikTok, além do JSON que vem renderizado no HTML. Cada item com `id`, `stats` e `video` vira um card. Anúncios são descartados.
-- O download usa os links de reprodução (`playAddr` e `bitrateInfo`), que não têm marca d'água. O `downloadAddr`, que tem, nunca é usado. O arquivo é buscado com os cookies da própria página e salvo como blob; se isso falhar, o `background.js` passa o link pro gerenciador de downloads do navegador.
-- O painel vive num shadow DOM, então o CSS do TikTok não vaza pra dentro nem o nosso pra fora.
+- `hook.js` runs in the page context at `document_start` and intercepts `fetch`/`XMLHttpRequest` calls to TikTok's `/api/` routes, plus the JSON rendered into the HTML. Every item with an `id`, `stats` and `video` becomes a card. Ads are dropped.
+- Downloads use the playback links (`playAddr` and `bitrateInfo`), which have no watermark. `downloadAddr`, which does, is never used. The file is fetched with the page's own cookies and saved as a blob; if that fails, `background.js` hands the link to the browser's download manager.
+- The panel lives in a shadow DOM, so TikTok's CSS doesn't leak in and ours doesn't leak out.
 
-Contribuições são bem-vindas. Abra uma issue antes de mudanças grandes.
+Contributions are welcome. Please open an issue before large changes.
 
-## Aviso
+## Disclaimer
 
-O ttsorter não tem nenhuma relação com o TikTok ou a ByteDance. Use para baixar conteúdo seu ou que você tem permissão de usar, e respeite os direitos autorais de quem criou o vídeo. Se o TikTok mudar o site, a extensão pode parar de funcionar até ser atualizada.
+ttsorter is not affiliated with TikTok or ByteDance. Use it to download your own content or content you have permission to use, and respect the copyright of the people who made the videos. If TikTok changes its site, the extension may stop working until it's updated.
 
-## Licença
+## License
 
 [MIT](LICENSE)

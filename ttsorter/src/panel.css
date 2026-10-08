@@ -1,6 +1,6 @@
 :host {
-  /* Grafite quente do logo + Persimmon e Wasabi (Pinterest Palette 2026);
-     Wasabi só marca a métrica ativa. */
+  /* Warm graphite from the logo + Persimmon and Wasabi (Pinterest Palette 2026);
+     Wasabi only marks the active metric. */
   --base: #1e1916;
   --bg: #171311;
   --surface: rgba(246, 236, 230, 0.05);
@@ -15,8 +15,8 @@
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* O host leva `all: initial` inline (blindagem contra o CSS do TikTok), que
-   ganha do :host; por isso tipografia e cor ficam nos filhos de topo. */
+/* The host carries `all: initial` inline (shield against TikTok's CSS), which
+   beats :host; that's why typography and color live on the top-level children. */
 .fab,
 .panel,
 .toast {
@@ -63,7 +63,7 @@ input:focus-visible {
   display: none !important;
 }
 
-/* ---------- botão flutuante ---------- */
+/* ---------- floating button ---------- */
 .fab {
   position: fixed;
   right: 20px;
@@ -127,7 +127,7 @@ input:focus-visible {
   transform: scale(1);
 }
 
-/* ---------- painel ---------- */
+/* ---------- panel ---------- */
 .panel {
   position: fixed;
   top: 16px;
@@ -229,7 +229,7 @@ input:focus-visible {
   transform: scale(0.94);
 }
 
-/* abas de ordenação */
+/* sort tabs */
 .sorts {
   position: relative;
   display: grid;
@@ -369,7 +369,7 @@ input:focus-visible {
   transform: rotate(180deg);
 }
 
-/* ---------- lista ---------- */
+/* ---------- list ---------- */
 .list {
   flex: 1;
   overflow-y: auto;
@@ -611,7 +611,7 @@ input:focus-visible {
   height: 15px;
 }
 
-/* botão de download com anel de progresso */
+/* download button with progress ring */
 .dl {
   height: 34px;
   border-radius: 50%;
@@ -691,7 +691,7 @@ input:focus-visible {
   }
 }
 
-/* ---------- vazio ---------- */
+/* ---------- empty state ---------- */
 .empty {
   display: none;
   flex: 1;
