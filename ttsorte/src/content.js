@@ -177,6 +177,13 @@
         <a class="act open" target="_blank" rel="noopener" title="Abrir no TikTok">${icon('open')}</a>
       </div>`;
     el.querySelector('.dl').addEventListener('click', () => startDownload(it.id));
+    for (const a of el.querySelectorAll('a.thumb, a.open')) {
+      a.addEventListener('click', (e) => {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        chrome.runtime.sendMessage({ type: 'open', url: a.href }).catch(() => window.open(a.href, '_blank', 'noopener'));
+      });
+    }
     el.querySelector('.copy').addEventListener('click', async () => {
       const cur = items.get(it.id);
       try {
