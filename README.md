@@ -8,9 +8,9 @@
 
 Grátis, open source, roda inteiro no seu navegador.
 
-[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-25f4ee?style=flat-square)](LICENSE)
-[![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-fe2c55?style=flat-square&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
-[![Release](https://img.shields.io/github/v/release/Andrei-Alb/ttsorte?style=flat-square&color=111114)](https://github.com/Andrei-Alb/ttsorte/releases/latest)
+[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-e9f056?style=flat-square&labelColor=1e1916)](LICENSE)
+[![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-ff5c34?style=flat-square&logo=googlechrome&logoColor=white&labelColor=1e1916)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
+[![Release](https://img.shields.io/github/v/release/Andrei-Alb/ttsorte?style=flat-square&color=ff5c34&labelColor=1e1916)](https://github.com/Andrei-Alb/ttsorte/releases/latest)
 
 [**⬇ Baixar a extensão**](https://github.com/Andrei-Alb/ttsorte/releases/latest/download/ttsorte.zip)
 

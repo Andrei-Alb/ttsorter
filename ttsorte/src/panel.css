@@ -1,14 +1,17 @@
 :host {
-  --bg: rgba(16, 16, 20, 0.82);
-  --surface: rgba(255, 255, 255, 0.045);
-  --surface-2: rgba(255, 255, 255, 0.08);
-  --line: rgba(255, 255, 255, 0.08);
-  --fg: #f4f4f5;
-  --muted: #a1a1aa;
-  --dim: #71717a;
-  --cyan: #25f4ee;
-  --pink: #fe2c55;
-  --grad: linear-gradient(135deg, var(--cyan), var(--pink));
+  /* Grafite quente do logo + Persimmon e Wasabi (Pinterest Palette 2026);
+     Wasabi só marca a métrica ativa. */
+  --base: #1e1916;
+  --bg: #171311;
+  --surface: rgba(246, 236, 230, 0.05);
+  --surface-2: rgba(246, 236, 230, 0.09);
+  --line: rgba(246, 236, 230, 0.1);
+  --fg: #f6eee9;
+  --muted: #bfb4ac;
+  --dim: #8c8078;
+  --accent: #ff5c34;
+  --on-accent: #1e1916;
+  --hi: #e9f056;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -46,7 +49,7 @@ button {
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--hi);
   outline-offset: 2px;
 }
 
@@ -70,31 +73,19 @@ input:focus-visible {
   border-radius: 16px;
   display: grid;
   place-items: center;
-  background: #111114;
-  border: 1px solid var(--line);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 12px 32px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 0, 0, 0.4);
+  background: var(--base);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
   transition-property: transform, opacity, filter;
   transition-duration: 220ms;
   transition-timing-function: var(--ease);
 }
 
-.fab .i {
-  width: 22px;
-  height: 22px;
-  color: var(--cyan);
-}
-
-.fab::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
+.fab img,
+.mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
   border-radius: inherit;
-  padding: 1px;
-  background: var(--grad);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.7;
 }
 
 .fab:hover {
@@ -120,14 +111,14 @@ input:focus-visible {
   height: 20px;
   padding: 0 6px;
   border-radius: 10px;
-  background: var(--pink);
-  color: #fff;
+  background: var(--hi);
+  color: var(--base);
   font-size: 11px;
   font-weight: 700;
   line-height: 20px;
   text-align: center;
   font-variant-numeric: tabular-nums;
-  box-shadow: 0 0 0 2px #111114;
+  box-shadow: 0 0 0 2px var(--base);
   transform: scale(0);
   transition: transform 200ms var(--ease);
 }
@@ -148,8 +139,6 @@ input:focus-visible {
   flex-direction: column;
   border-radius: 22px;
   background: var(--bg);
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
   border: 1px solid var(--line);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 64px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -188,18 +177,9 @@ input:focus-visible {
 .mark {
   width: 34px;
   height: 34px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: var(--grad);
-  color: #0b0b0e;
-  box-shadow: 0 6px 18px -6px rgba(254, 44, 85, 0.55);
-}
-
-.mark .i {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2.4;
+  border-radius: 9px;
+  flex: none;
+  overflow: hidden;
 }
 
 .brand-txt {
@@ -287,7 +267,7 @@ input:focus-visible {
 }
 
 .sort.on {
-  color: #0b0b0e;
+  color: var(--on-accent);
 }
 
 .sort-pill {
@@ -296,8 +276,7 @@ input:focus-visible {
   left: 0;
   height: 48px;
   border-radius: 10px;
-  background: var(--grad);
-  box-shadow: 0 6px 16px -6px rgba(37, 244, 238, 0.5);
+  background: var(--accent);
   transition: transform 320ms var(--ease), width 320ms var(--ease);
 }
 
@@ -323,7 +302,7 @@ input:focus-visible {
 }
 
 .search:focus-within {
-  border-color: rgba(37, 244, 238, 0.45);
+  border-color: rgba(233, 240, 86, 0.45);
 }
 
 .search input {
@@ -377,9 +356,9 @@ input:focus-visible {
 }
 
 .chip.on {
-  color: var(--cyan);
-  border-color: rgba(37, 244, 238, 0.4);
-  background: rgba(37, 244, 238, 0.08);
+  color: var(--hi);
+  border-color: rgba(233, 240, 86, 0.4);
+  background: rgba(233, 240, 86, 0.08);
 }
 
 .dir .i {
@@ -485,8 +464,8 @@ input:focus-visible {
 .card:nth-child(1) .rank,
 .card:nth-child(2) .rank,
 .card:nth-child(3) .rank {
-  background: var(--grad);
-  color: #0b0b0e;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .dur {
@@ -544,7 +523,7 @@ input:focus-visible {
 }
 
 .when.hot {
-  color: var(--cyan);
+  color: var(--hi);
   font-weight: 600;
 }
 
@@ -597,7 +576,7 @@ input:focus-visible {
 
 .stats span.hot,
 .stats span.hot b {
-  color: var(--cyan);
+  color: var(--hi);
 }
 
 .actions {
@@ -641,8 +620,8 @@ input:focus-visible {
 }
 
 .dl:hover {
-  background: var(--grad);
-  color: #0b0b0e;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .ring {
@@ -657,7 +636,7 @@ input:focus-visible {
 
 .ring circle {
   fill: none;
-  stroke: var(--cyan);
+  stroke: var(--accent);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-dasharray: 100.53;
@@ -690,13 +669,13 @@ input:focus-visible {
 }
 
 .dl[data-state='done'] {
-  background: rgba(37, 244, 238, 0.14);
-  color: var(--cyan);
+  background: rgba(233, 240, 86, 0.14);
+  color: var(--hi);
 }
 
 .dl[data-state='error'] {
-  background: rgba(254, 44, 85, 0.14);
-  color: var(--pink);
+  background: rgba(255, 92, 52, 0.14);
+  color: var(--accent);
 }
 
 .dl-ico {
@@ -757,7 +736,7 @@ input:focus-visible {
 
 .empty-art span:nth-child(2) {
   animation-delay: 0.2s;
-  background: var(--grad);
+  background: var(--accent);
   opacity: 0.85;
 }
 
@@ -778,8 +757,8 @@ input:focus-visible {
   bottom: 32px;
   padding: 10px 14px;
   border-radius: 12px;
-  background: #f4f4f5;
-  color: #0b0b0e;
+  background: var(--fg);
+  color: var(--on-accent);
   font-size: 12.5px;
   font-weight: 600;
   box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);

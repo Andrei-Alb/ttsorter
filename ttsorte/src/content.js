@@ -32,10 +32,10 @@
     alert: '<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>',
     user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
     photo: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/>',
-    logo: '<path d="M4 6h16M4 12h10M4 18h5"/><path d="m17 15 3 3 3-3M20 9v9"/>',
   };
   const icon = (name, cls = '') =>
     `<svg class="i ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+  const LOGO = chrome.runtime.getURL('icons/128.png');
 
   const compact = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 1 });
   const full = new Intl.NumberFormat('pt-BR');
@@ -61,12 +61,12 @@
   root.innerHTML = `
     <link rel="stylesheet" href="${chrome.runtime.getURL('src/panel.css')}">
     <button class="fab" part="fab" title="Abrir ttsorte">
-      ${icon('logo')}<span class="fab-count">0</span>
+      <img src="${LOGO}" alt=""><span class="fab-count">0</span>
     </button>
     <section class="panel" role="dialog" aria-label="ttsorte">
       <header class="head">
         <div class="brand">
-          <span class="mark">${icon('logo')}</span>
+          <span class="mark"><img src="${LOGO}" alt=""></span>
           <div class="brand-txt"><strong>ttsorte</strong><span class="sub"><b class="count">0</b> vídeos capturados</span></div>
         </div>
         <div class="head-actions">
