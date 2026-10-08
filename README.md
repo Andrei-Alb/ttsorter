@@ -83,6 +83,7 @@ Permissões pedidas:
 
 - `storage`: lembrar a ordenação escolhida e se o painel estava aberto.
 - `downloads`: plano B de download quando o navegador bloqueia o caminho principal.
+- `webRequest`: ver o status das páginas do TikTok que a extensão abre; quando o TikTok responde 403, a aba recarrega sozinha (até 2 vezes).
 - Acesso a `www.tiktok.com`: o único site onde ela roda.
 
 ## Como funciona
