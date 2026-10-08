@@ -28,6 +28,8 @@ Free, open source, runs entirely in your browser.
 - **Downloads the video** without watermark, at the highest resolution TikTok serves (up to 1080p). Photo posts download their images.
 - **Filters** by caption or @profile. On a profile page it shows only that profile's videos (TikTok mixes in recommendations from other accounts).
 
+Looking for Instagram? Check out [isorter](https://github.com/Andrei-Alb/isorter).
+
 <table>
 <tr>
 <td width="50%" align="center"><img src="docs/demo.gif" alt="Changing the sort order and downloading a video"><br><sub>Sorting and downloading</sub></td>
